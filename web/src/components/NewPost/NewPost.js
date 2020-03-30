@@ -1,7 +1,7 @@
-import { useMutation } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
 import PostForm from 'src/components/PostForm'
 
+import { navigate, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
 const CREATE_POST_MUTATION = gql`
   mutation CreatePostMutation($input: PostInput!) {
     createPost(input: $input) {

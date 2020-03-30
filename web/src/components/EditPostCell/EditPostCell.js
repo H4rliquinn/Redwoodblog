@@ -1,6 +1,7 @@
+import PostForm from 'src/components/PostForm'
+
 import { useMutation } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
-import PostForm from 'src/components/PostForm'
 
 export const QUERY = gql`
   query FIND_POST_BY_ID($id: Int!) {
