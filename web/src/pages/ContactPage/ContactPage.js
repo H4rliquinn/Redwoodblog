@@ -6,6 +6,7 @@ import {
   TextAreaField,
   Submit,
   FieldError,
+  Label,
 } from '@redwoodjs/web'
 const onSubmit = (data) => {
   console.log(data)
@@ -14,31 +15,47 @@ const ContactPage = () => {
   return (
     <BlogLayout>
       <Form onSubmit={onSubmit}>
-        <label htmlFor="name" style={{ display: 'block' }}>
+        <Label
+          name="name"
+          style={{ display: 'block' }}
+          errorStyle={{ display: 'block', color: 'red' }}
+        >
           Name
-        </label>
+        </Label>
         <TextField
           name="name"
           style={{ display: 'block' }}
+          errorStyle={{ display: 'block', borderColor: 'red' }}
           validation={{ required: true }}
         />
-        <FieldError name="name" />
-        <label htmlFor="email" style={{ display: 'block' }}>
+        <FieldError name="name" style={{ color: 'red' }} />
+
+        <Label
+          name="email"
+          style={{ display: 'block' }}
+          errorStyle={{ display: 'block', color: 'red' }}
+        >
           Email
-        </label>
+        </Label>
         <TextField
           name="email"
           style={{ display: 'block' }}
+          errorStyle={{ display: 'block', borderColor: 'red' }}
           validation={{ required: true }}
         />
-        <FieldError name="email" />
+        <FieldError name="email" style={{ color: 'red' }} />
 
-        <label htmlFor="message" style={{ display: 'block' }}>
+        <Label
+          name="message"
+          style={{ display: 'block' }}
+          errorStyle={{ display: 'block', color: 'red' }}
+        >
           Message
-        </label>
+        </Label>
         <TextAreaField
           name="message"
           style={{ display: 'block' }}
+          errorStyle={{ display: 'block', borderColor: 'red' }}
           validation={{ required: true }}
         />
         <FieldError name="message" style={{ color: 'red' }} />
