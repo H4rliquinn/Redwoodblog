@@ -25,6 +25,7 @@ const ContactPage = () => {
   const [create, { loading, error }] = useMutation(CREATE_CONTACT, {
     onCompleted: () => {
       alert('Thank you for your submission!')
+      formMethods.reset()
     },
   })
 
