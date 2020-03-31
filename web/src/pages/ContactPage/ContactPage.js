@@ -1,5 +1,6 @@
 import BlogLayout from 'src/layouts/BlogLayout'
 
+import { useForm } from 'react-hook-form'
 import { useMutation } from '@redwoodjs/web'
 import {
   Form,
@@ -8,6 +9,7 @@ import {
   Submit,
   FieldError,
   Label,
+  FormError,
 } from '@redwoodjs/web'
 
 const CREATE_CONTACT = gql`
@@ -19,7 +21,12 @@ const CREATE_CONTACT = gql`
 `
 
 const ContactPage = () => {
-  const [create] = useMutation(CREATE_CONTACT)
+  const formMethods = useForm()
+  const [create, { loading, error }] = useMutation(CREATE_CONTACT, {
+    onCompleted: () => {
+      alert('Thank you for your submission!')
+    },
+  })
 
   const onSubmit = (data) => {
     create({ variables: { input: data } })
@@ -28,7 +35,16 @@ const ContactPage = () => {
 
   return (
     <BlogLayout>
-      <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }}>
+      <Form
+        onSubmit={onSubmit}
+        validation={{ mode: 'onBlur' }}
+        error={error}
+        formMethods={formMethods}
+      >
+        <FormError
+          error={error}
+          wrapperStyle={{ color: 'red', backgroundColor: 'lavenderblush' }}
+        />
         <Label
           name="name"
           style={{ display: 'block' }}
@@ -80,7 +96,9 @@ const ContactPage = () => {
         />
         <FieldError name="message" style={{ color: 'red' }} />
 
-        <Submit style={{ display: 'block' }}>Save</Submit>
+        <Submit style={{ display: 'block' }} disabled={loading}>
+          Save
+        </Submit>
       </Form>
     </BlogLayout>
   )
