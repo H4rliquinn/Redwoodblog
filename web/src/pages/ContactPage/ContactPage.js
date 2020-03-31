@@ -1,5 +1,6 @@
 import BlogLayout from 'src/layouts/BlogLayout'
 
+import { useMutation } from '@redwoodjs/web'
 import {
   Form,
   TextField,
@@ -8,10 +9,23 @@ import {
   FieldError,
   Label,
 } from '@redwoodjs/web'
-const onSubmit = (data) => {
-  console.log(data)
-}
+
+const CREATE_CONTACT = gql`
+  mutation CreateContactMutation($input: ContactInput!) {
+    createContact(input: $input) {
+      id
+    }
+  }
+`
+
 const ContactPage = () => {
+  const [create] = useMutation(CREATE_CONTACT)
+
+  const onSubmit = (data) => {
+    create({ variables: { input: data } })
+    console.log(data)
+  }
+
   return (
     <BlogLayout>
       <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }}>
