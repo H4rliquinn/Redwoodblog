@@ -1,6 +1,13 @@
+// LOCAL DATABASE
+// datasource DS {
+//   provider = "sqlite"
+//   url      = env("DATABASE_URL")
+// }
+
+//PRODUCTION DATABASE
 datasource DS {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url = env("DATABASE_URL")
 }
 
 generator client {
