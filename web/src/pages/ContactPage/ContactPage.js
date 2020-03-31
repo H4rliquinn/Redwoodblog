@@ -14,7 +14,7 @@ const onSubmit = (data) => {
 const ContactPage = () => {
   return (
     <BlogLayout>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }}>
         <Label
           name="name"
           style={{ display: 'block' }}
@@ -41,7 +41,13 @@ const ContactPage = () => {
           name="email"
           style={{ display: 'block' }}
           errorStyle={{ display: 'block', borderColor: 'red' }}
-          validation={{ required: true }}
+          validation={{
+            required: true,
+            pattern: {
+              value: /[^@]+@[^.]+\..+/,
+              message: 'Please enter a valid email address',
+            },
+          }}
         />
         <FieldError name="email" style={{ color: 'red' }} />
 
